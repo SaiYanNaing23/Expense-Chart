@@ -1,5 +1,6 @@
 import Expense from "./components/Expenses/Expense";
 import Card from "./components/UI/Card";
+import NewExpense from "./components/NewExpense/NewExpense";
 
 const expenses = [
   {
@@ -24,8 +25,17 @@ const expenses = [
   ];
 
 const App = () => {
+  const onAddExpenseHandler = (addExpense) =>{
+    const ExpenseData = {
+      ...addExpense,
+      id : Math.random().toString()
+    }
+    console.log("In App")
+    console.log(ExpenseData)
+  }
   return (
     <Card className="expenses" >
+      <NewExpense onAddExpense = {onAddExpenseHandler} />
       <Expense expenses={expenses}/>
     </Card>
   );
