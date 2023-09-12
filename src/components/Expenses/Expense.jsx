@@ -2,7 +2,7 @@ import ExpenseItem from "./ExpenseItem"
 import "./Expense.css";
 import ExpenseFilter from "./ExpenseFilter";
 import { useState } from "react";
-const Expense = ({expenses}) => {
+const Expense = (props) => {
   const [filter,setFilter] = useState("")
   const onFilterYearHandler= (filterYear)=>{
     setFilter(filterYear);
@@ -10,13 +10,12 @@ const Expense = ({expenses}) => {
   }
   return (
     <div>
-      <ExpenseFilter filterYear={filter} onFilterYear = {onFilterYearHandler} />
-        <ExpenseItem title={expenses[0].title} date={expenses[0].date} amount={expenses[0].amount} />
-        <ExpenseItem title={expenses[1].title} date={expenses[1].date} amount={expenses[1].amount}/>
-        <ExpenseItem title={expenses[2].title} date={expenses[2].date} amount={expenses[2].amount}/>
-        <ExpenseItem title={expenses[3].title} date={expenses[3].date} amount={expenses[3].amount}/>
+      <ExpenseFilter filterYear={filter} onFilterYear ={onFilterYearHandler} />
+      {props.items.map((expense)=>(
+        <ExpenseItem title={expense.title} date={expense.date} amount={expense.amount} />
+      ))}
     </div>
   )
 }
 
-export default Expense
+export default Expense;

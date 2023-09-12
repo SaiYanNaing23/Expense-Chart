@@ -1,8 +1,9 @@
 import Expense from "./components/Expenses/Expense";
 import Card from "./components/UI/Card";
 import NewExpense from "./components/NewExpense/NewExpense";
+import { useState } from "react";
 
-const expenses = [
+const Dummy_Expenses = [
   {
   id: "e1",
   title: "Toilet Paper",
@@ -25,18 +26,17 @@ const expenses = [
   ];
 
 const App = () => {
+  const [expenses,setExpenses] = useState(Dummy_Expenses)
   const onAddExpenseHandler = (addExpense) =>{
-    const ExpenseData = {
-      ...addExpense,
-      id : Math.random().toString()
-    }
-    console.log("In App")
-    console.log(ExpenseData)
+    setExpenses((expenses)=>[
+      addExpense,
+      ...expenses
+    ])
   }
   return (
     <Card className="expenses" >
       <NewExpense onAddExpense = {onAddExpenseHandler} />
-      <Expense expenses={expenses}/>
+      <Expense items={expenses}/>
     </Card>
   );
 }
